@@ -1,10 +1,21 @@
 package main 
 
-
-import "fmt"
+import (
+	"fmt"
+	"log"
+	"book-scraping-and-question-generation/internal/storage"
+	"github.com/joho/godotenv"
+) 
 
 func main(){
-	fmt.Println("Hey this is a message from me to you a new developer in go.")
+ if err := godotenv.Load(); err != nil {
+	 log.Println("No .env file found")
+ }
+	
+ storage.ConnectDB()
+
+ fmt.Println("System is ready for data.")
+
 }
 
 
