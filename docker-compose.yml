@@ -1,0 +1,40 @@
+services:
+  mongo:
+    image: mongo:7
+    container_name: book-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: book-ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: book-backend
+    ports:
+      - "8080:8080"
+    env_file: .env
+    depends_on:
+      - mongo
+      - ollama
+
+  frontend:
+    build: ./frontend
+    container_name: book-frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+volumes:
+  mongo_data:
+  ollama_data:
