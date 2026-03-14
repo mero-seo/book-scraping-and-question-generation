@@ -1,4 +1,4 @@
-.PHONY: dev stop api frontend scrape embed generate test
+.PHONY: dev stop api frontend scrape embed generate test build pull-models
 
 # Start all Docker services
 dev:
@@ -39,6 +39,16 @@ generate:
 # Run all Go tests
 test:
 	go test ./internal/... ./backend/... ./scraper/...
+
+# Build all Go binaries
+build:
+	cd backend && go build -o ../bin/server .
+	cd scraper && go build -o ../bin/scraper ./cmd/scraper
+
+# Pull required Ollama models
+pull-models:
+	ollama pull nomic-embed-text
+	ollama pull llama3.2:3b
 
 # Tidy all modules
 tidy:

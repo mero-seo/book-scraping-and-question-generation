@@ -1,2 +1,36 @@
+# Secrets
 .env
+.env.local
+.env.*.local
 
+# Dependencies
+node_modules/
+
+# Build artifacts
+dist/
+build/
+bin/
+frontend/.next/
+frontend/out/
+
+# Go
+*.exe
+*.test
+*.out
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Docker volumes (local)
+mongo_data/
+ollama_data/
